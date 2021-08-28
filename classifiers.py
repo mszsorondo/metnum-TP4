@@ -45,7 +45,7 @@ class clasificador:
         recallAVG = report["macro avg"][1]
         f1ScoreAVG = report["macro avg"][2]
 
-        message = "Accuracy: ", acc, "\nPrecision(avg): ", precisionAVG, "\nRecall: ", recallAVG, "F1avg: ", f1ScoreAVG
+        message = "Accuracy: ", acc, "\n Precision(avg): ", precisionAVG, "\n Recall: ", recallAVG, "\n F1avg: ", f1ScoreAVG
         
         print("\n ------------ k = ", self.k, "------------alpha = ", self.alpha, "----------\n")
         print(message)

@@ -6,8 +6,8 @@ import pandas as pd
 
 df = pd.read_csv("./data/fashion-mnist_train.csv")
 
-alphas = [i for i in range(1,8,2)]
-ks = [i for i in range(1,8,2)]
+alphas = [i for i in range(1,50,2)]
+ks = [i for i in range(1,50,2)]
 
 dfacc = pd.DataFrame()
 dfrec = pd.DataFrame()
@@ -29,6 +29,15 @@ for a in alphas:
     dfprec["alpha = " + str(a)]= pd.Series(listprec)
     dfrec["alpha = " + str(a)] = pd.Series(listrec)
     dff1["alpha = " + str(a)]  = pd.Series(listf1)
+dfacc["idx"] = ["k = " + str(i) for i in ks]
+dfprec["idx"] = ["k = " + str(i) for i in ks]
+dfrec["idx"] = ["k = " + str(i) for i in ks]
+dff1["idx"] = ["k = " + str(i) for i in ks]
+
+dfacc.set_index("idx", inplace=True)
+dfprec.set_index("idx", inplace=True)
+dfrec.set_index("idx", inplace=True)
+dff1.set_index("idx", inplace=True)
 
 dfacc.to_csv("accuracy.csv")
 dfrec.to_csv("recall.csv")
