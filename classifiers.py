@@ -21,6 +21,7 @@ class clasificador:
         self.y_test = None
         self.PCAobj = None
         self.model = KNeighborsClassifier(self.k)
+        self.performance_last = 0
     def __preprocessing(self):
         #hace el split de los datos y el PCA
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X,self.y)
@@ -37,9 +38,12 @@ class clasificador:
         return self.model.predict(self.X_test)
 
     def diagnose(self):
+        start = time.perf_counter()
         self.__preprocessing()
         self.__fit()
         report = pd.DataFrame(classification_report(self.y_test,self.__predict(), output_dict=True))
+        end = time.perf_counter()
+        self.performance_last = end-start
         acc = report["accuracy"][1]
         precisionAVG = report["macro avg"][0]
         recallAVG = report["macro avg"][1]
@@ -49,6 +53,7 @@ class clasificador:
         
         print("\n ------------ k = ", self.k, "------------alpha = ", self.alpha, "----------\n")
         print(message)
-        return([acc, precisionAVG, recallAVG,f1ScoreAVG])
+        print("\n", self.performance_last, " seconds \n")
+        return([acc, precisionAVG, recallAVG,f1ScoreAVG, self.performance_last])
         """Aca se entrena al modelo con las funciones internas y se hace un reporte entero de la performance"""
-        
+    
