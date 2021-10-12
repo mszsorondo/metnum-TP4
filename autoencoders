@@ -1,0 +1,18 @@
+notes on autoencoders
+
+So far we know...
+Autoencoder structure:
+
+-input layers have same size as output layers
+
+-they are trained on their own inputs as labels
+
+-we have to extract the part of the network that encodes the data (until the 'bottleneck' layer, with a much lower dimension). Question: how is this done exactly? -> Networks defined modularly where each layer is an object by itself, and the training modifies its parameters by reference
+
+
+Karpathy's example:
+-obs: network is symmetric
+-6 layers
+-hidden middle layers of 50 neurons
+-bottleneck 2 neurons
+-activation tanh
